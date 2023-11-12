@@ -1,17 +1,20 @@
-package io;
+package ch.hatbe2113.consoleNotepad.io;
 
-import commands.*;
+import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.commands.*;
 
 import java.util.Scanner;
 
 public class ConsoleHandler {
 
+    private Main main;
     private Scanner scanner;
     private CommandHandler commandHandler;
 
-    public ConsoleHandler() {
-        this.scanner = new Scanner(System.in);
-        this.commandHandler = new CommandHandler();
+    public ConsoleHandler(Main main) {
+        this.main = main;
+        this.commandHandler = new CommandHandler(this.main);
+        this.registerCommands();
     }
 
     private void registerCommands() {
@@ -26,17 +29,26 @@ public class ConsoleHandler {
     }
 
     public void listen() {
+        this.scanner = new Scanner(System.in);
+
         String userInput = scanner.nextLine();
         String[] userInputArray = userInput.split(" ");
 
         if(userInputArray.length < 1) {
-            System.err.println("ERROR: not a valid amount of arguments!");
+            System.err.println("ERROR: Not a valid amount of arguments!");
         }
 
-        switch(userInputArray[0].toUpperCase()) {
-            default:
-                System.err.println("ERROR: wrong argument");
-                break;
+        String command = userInputArray[0];
+        String[] args = null;
+
+        if(userInputArray.length > 1) {
+            args = userInputArray;
+        }
+
+        if(this.commandHandler.isCommand(command)) {
+            this.commandHandler.executeCommand(command, args);
+        } else {
+            System.err.println(String.format("ERROR: \"%s\" Not a valid command!", command));
         }
     }
 }
