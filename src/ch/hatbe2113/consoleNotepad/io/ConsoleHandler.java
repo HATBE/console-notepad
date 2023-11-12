@@ -13,24 +13,23 @@ public class ConsoleHandler {
 
     public ConsoleHandler(Main main) {
         this.main = main;
+        this.scanner = new Scanner(System.in);
         this.commandHandler = new CommandHandler(this.main);
         this.registerCommands();
     }
 
     private void registerCommands() {
-        this.commandHandler.register("add", new AddCommand());
-        this.commandHandler.register("del", new DelCommand());
-        this.commandHandler.register("dummy", new DummyCommand());
-        this.commandHandler.register("exit", new ExitCommand());
-        this.commandHandler.register("format", new FormatCommand());
-        this.commandHandler.register("index", new IndexCommand());
-        this.commandHandler.register("print", new PrintCommand());
-        this.commandHandler.register("replace", new ReplaceCommand());
+        this.commandHandler.register("add", new AddCommand(this.main));
+        this.commandHandler.register("del", new DelCommand(this.main));
+        this.commandHandler.register("dummy", new DummyCommand(this.main));
+        this.commandHandler.register("exit", new ExitCommand(this.main));
+        this.commandHandler.register("format", new FormatCommand(this.main));
+        this.commandHandler.register("index", new IndexCommand(this.main));
+        this.commandHandler.register("print", new PrintCommand(this.main));
+        this.commandHandler.register("replace", new ReplaceCommand(this.main));
     }
 
     public void listen() {
-        this.scanner = new Scanner(System.in);
-
         String userInput = scanner.nextLine();
         String[] userInputArray = userInput.split(" ");
 
@@ -39,14 +38,19 @@ public class ConsoleHandler {
         }
 
         String command = userInputArray[0];
-        String[] args = null;
+        String[] args = {};
 
         if(userInputArray.length > 1) {
+            // array shift
+            for(int i = userInputArray.length - 1; i > 0; i--) {
+                userInputArray[i-1] = userInputArray[i];
+            }
+
             args = userInputArray;
         }
 
-        if(this.commandHandler.isCommand(command)) {
-            this.commandHandler.executeCommand(command, args);
+        if(this.commandHandler.isCommand(command.toLowerCase())) {
+            this.commandHandler.executeCommand(command.toLowerCase(), args);
         } else {
             System.err.println(String.format("ERROR: \"%s\" Not a valid command!", command));
         }
