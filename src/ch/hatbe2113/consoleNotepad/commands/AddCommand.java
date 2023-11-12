@@ -2,6 +2,8 @@ package ch.hatbe2113.consoleNotepad.commands;
 
 import ch.hatbe2113.consoleNotepad.Main;
 
+import java.sql.SQLOutput;
+
 public class AddCommand extends Command {
     public AddCommand(Main main) {
         super(main);
@@ -9,6 +11,8 @@ public class AddCommand extends Command {
 
     @Override
     public boolean onCommand(String[] args) {
+        System.out.println(args[0]);
+
         int line = 0; // TODO: add line at the bottom as default
 
         if(args.length > 0) {

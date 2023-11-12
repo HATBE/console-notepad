@@ -42,8 +42,8 @@ public class ConsoleHandler {
 
         if(userInputArray.length > 1) {
             // array shift
-            for(int i = userInputArray.length - 1; i > 0; i--) {
-                userInputArray[i-1] = userInputArray[i];
+            for(int i = 1; i < userInputArray.length; i++) {
+                userInputArray[i - 1] = userInputArray[i];
             }
 
             args = userInputArray;
