@@ -1,4 +1,8 @@
 package commands;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
+    @Override
+    public boolean onCommand() {
+        return false;
+    }
 }
