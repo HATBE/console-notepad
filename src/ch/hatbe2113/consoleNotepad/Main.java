@@ -29,19 +29,40 @@ public class Main {
 
         while(mainInstance.run) {
             System.out.println("--------------------");
-            mainInstance.consoleHandler.scan("Command");
+            String userInput = mainInstance.consoleHandler.scan("Command");
+
+            String[] userInputArray = userInput.split(" ");
+
+            if(userInputArray.length < 1) {
+                System.err.println("ERROR: Not a valid amount of arguments!");
+            }
+
+            String command = userInputArray[0].toLowerCase();
+            String[] arguments = new String[Math.max(userInputArray.length - 1, 0)];
+
+            if(userInputArray.length > 1) {
+                // array copy -> into arguments
+                System.arraycopy(userInputArray, 1, arguments, 0, userInputArray.length - 1);
+            }
+
+            if(!mainInstance.getCommandHandler().isCommand(command)) {
+                System.err.printf("ERROR: \"%s\" Not a valid command!\n", command);
+                return;
+            }
+
+            mainInstance.getCommandHandler().executeCommand(command, arguments);
         }
     }
 
     private void registerCommands() {
-        this.commandHandler.register("add", new AddCommand(this));
-        this.commandHandler.register("del", new DelCommand(this));
-        this.commandHandler.register("dummy", new DummyCommand(this));
-        this.commandHandler.register("exit", new ExitCommand(this));
-        this.commandHandler.register("format", new FormatCommand(this));
-        this.commandHandler.register("index", new IndexCommand(this));
-        this.commandHandler.register("print", new PrintCommand(this));
-        this.commandHandler.register("replace", new ReplaceCommand(this));
+        this.commandHandler.registerCommand("add", new AddCommand(this));
+        this.commandHandler.registerCommand("del", new DelCommand(this));
+        this.commandHandler.registerCommand("dummy", new DummyCommand(this));
+        this.commandHandler.registerCommand("exit", new ExitCommand(this));
+        this.commandHandler.registerCommand("format", new FormatCommand(this));
+        this.commandHandler.registerCommand("index", new IndexCommand(this));
+        this.commandHandler.registerCommand("print", new PrintCommand(this));
+        this.commandHandler.registerCommand("replace", new ReplaceCommand(this));
     }
 
     public void exit() {

@@ -12,7 +12,7 @@ public class CommandHandler {
         this.main = main;
     }
 
-    public void register(String name, Command command) {
+    public void registerCommand(String name, Command command) {
         if(this.isCommand(name)) {
             return;
         }
