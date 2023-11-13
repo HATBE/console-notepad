@@ -11,8 +11,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean onCommand(String[] args) {
+    public boolean onExecute(String[] args) {
         int index = main.getNotepadHandler().getNotepadSize();
+        String text = "";
 
         if(args.length > 0) {
             try {
@@ -23,9 +24,9 @@ public class AddCommand extends Command {
             }
         }
 
-        System.out.println("Add at line: " + index);
+        System.out.printf("Add at line: %s\n", index + 1);
 
-        main.getNotepadHandler().addParagraph(index, "TEST");
+        main.getNotepadHandler().addParagraph(index, text);
 
         return true;
     }

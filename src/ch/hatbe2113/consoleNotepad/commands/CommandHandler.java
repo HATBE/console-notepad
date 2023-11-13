@@ -1,7 +1,6 @@
 package ch.hatbe2113.consoleNotepad.commands;
 
 import ch.hatbe2113.consoleNotepad.Main;
-import ch.hatbe2113.consoleNotepad.commands.Command;
 
 import java.util.HashMap;
 
@@ -24,7 +23,7 @@ public class CommandHandler {
         if(!this.isCommand(name)) {
             return;
         }
-        this.commands.get(name).onCommand(args);
+        this.commands.get(name).onExecute(args);
     }
 
     public HashMap<String, Command> getCommands() {

@@ -9,5 +9,5 @@ public abstract class Command {
         this.main = main;
     }
 
-    public abstract boolean onCommand(String[] args);
+    public abstract boolean onExecute(String[] args);
 }

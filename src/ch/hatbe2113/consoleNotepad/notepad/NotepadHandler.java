@@ -7,7 +7,7 @@ import java.util.List;
 
 public class NotepadHandler {
     private Main main;
-    private List<String> paragraphs = new ArrayList<>();
+    private final List<String> paragraphs = new ArrayList<>();
 
     public NotepadHandler(Main main) {
         this.main = main;
@@ -29,9 +29,7 @@ public class NotepadHandler {
         return paragraphs;
     }
 
-    // TEST:
     public void print() {
-        System.out.println("hey");
         for(int i = 0; i < paragraphs.size(); i++) {
             System.out.println((i + 1) + ": " + paragraphs.get(i));
         }

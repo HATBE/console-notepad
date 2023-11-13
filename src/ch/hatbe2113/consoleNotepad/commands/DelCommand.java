@@ -8,8 +8,8 @@ public class DelCommand extends Command {
     }
 
     @Override
-    public boolean onCommand(String[] args) {
-        System.out.println("Del");
+    public boolean onExecute(String[] args) {
+        System.out.println("DEL is not implemented");
         return true;
     }
 }

@@ -8,8 +8,8 @@ public class DummyCommand extends Command {
     }
 
     @Override
-    public boolean onCommand(String[] args) {
-        System.out.println("ADD");
+    public boolean onExecute(String[] args) {
+        System.out.println("ADD is not implemented");
         return true;
     }
 }

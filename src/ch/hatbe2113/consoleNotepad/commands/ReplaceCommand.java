@@ -8,8 +8,8 @@ public class ReplaceCommand extends Command {
     }
 
     @Override
-    public boolean onCommand(String[] args) {
-        System.out.println("Replace");
+    public boolean onExecute(String[] args) {
+        System.out.println("REPLACE is not implemented");
         return true;
     }
 }

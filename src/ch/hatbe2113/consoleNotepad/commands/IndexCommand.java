@@ -8,8 +8,8 @@ public class IndexCommand extends Command {
     }
 
     @Override
-    public boolean onCommand(String[] args) {
-        System.out.println("Index");
+    public boolean onExecute(String[] args) {
+        System.out.println("INDEX is not implemented");
         return true;
     }
 }

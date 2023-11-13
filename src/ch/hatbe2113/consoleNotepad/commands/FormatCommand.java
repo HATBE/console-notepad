@@ -8,8 +8,8 @@ public class FormatCommand extends Command {
     }
 
     @Override
-    public boolean onCommand(String[] args) {
-        System.out.println("Format");
+    public boolean onExecute(String[] args) {
+        System.out.println("FORMAT is not implemented");
         return true;
     }
 }
