@@ -1,5 +1,39 @@
 package ch.hatbe2113.consoleNotepad.notepad;
 
-public class NotepadHandler {
+import ch.hatbe2113.consoleNotepad.Main;
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class NotepadHandler {
+    private Main main;
+    private List<String> paragraphs = new ArrayList<>();
+
+    public NotepadHandler(Main main) {
+        this.main = main;
+    }
+
+    public void addParagraph(int index, String text) {
+        this.paragraphs.add(index, text);
+    }
+
+    public void removeParagraph(int index) {
+        this.paragraphs.remove(index);
+    }
+
+    public int getNotepadSize() {
+        return this.paragraphs.size();
+    }
+
+    public List<String> getParagraphs() {
+        return paragraphs;
+    }
+
+    // TEST:
+    public void print() {
+        System.out.println("hey");
+        for(int i = 0; i < paragraphs.size(); i++) {
+            System.out.println((i + 1) + ": " + paragraphs.get(i));
+        }
+    }
 }

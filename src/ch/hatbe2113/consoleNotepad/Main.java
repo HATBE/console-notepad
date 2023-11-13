@@ -1,14 +1,17 @@
 package ch.hatbe2113.consoleNotepad;
 
 import ch.hatbe2113.consoleNotepad.io.ConsoleHandler;
+import ch.hatbe2113.consoleNotepad.notepad.NotepadHandler;
 
 public class Main {
 
     private ConsoleHandler consoleHandler;
+    private NotepadHandler notepadHandler;
     private boolean run = true;
 
     public Main() {
         this.consoleHandler = new ConsoleHandler(this);
+        this.notepadHandler = new NotepadHandler(this);
     }
 
     public static void main(String[] args) {
@@ -25,7 +28,11 @@ public class Main {
         }
     }
 
-    public void stop() {
+    public void exit() {
         this.run = false;
+    }
+
+    public NotepadHandler getNotepadHandler() {
+        return this.notepadHandler;
     }
 }
