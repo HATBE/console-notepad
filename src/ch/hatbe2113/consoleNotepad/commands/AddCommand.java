@@ -14,6 +14,11 @@ public class AddCommand extends Command {
         int index = -1;
         String text = "";
 
+        if(args.length >= 2) {
+            System.out.println(String.format("%sError! Too many arguments: use \"ADD [n]\"!%s", Main.ANSI_RED, Main.ANSI_RESET));
+            return false;
+        }
+
         // parse second argument to index (int)
         if(args.length > 0) {
             try {
@@ -31,6 +36,9 @@ public class AddCommand extends Command {
         }
 
         text = main.getConsoleHandler().scan("Text:");
+
+        // filter the text. Allowed: (a-z, A-Z, äöüÄÖÜ, 0-9, .,:;-!? '()"%@+*[]{}/\&#$),
+        text = text.replaceAll("[^a-zA-ZäöüÄÖÜ0-9.,:;!? '()\"%@+*\\[\\]{}\\/\\\\&#$-]", "");
 
         if(index == -1) {
             // if index is -1, add paragraph at the end of the notepad

@@ -11,11 +11,17 @@ public class DelCommand extends Command {
     public boolean onExecute(String[] args) {
         int index = -1;
 
+        // return if too many arguments
+        if(args.length >= 2) {
+            System.out.println(String.format("%sError! Too many arguments: use \"DEL [n]\"!%s", Main.ANSI_RED, Main.ANSI_RESET));
+            return false;
+        }
+
         if(args.length > 0) {
             try {
                 index = Integer.parseInt(args[0]);
             } catch(Exception e) {
-                System.out.println(String.format("%sError: Please enter an int!%s", Main.ANSI_RED, Main.ANSI_RESET));
+                System.out.println(String.format("%sError: Please enter a line number as a first argument!%s", Main.ANSI_RED, Main.ANSI_RESET));
                 return false;
             }
 
@@ -25,8 +31,6 @@ public class DelCommand extends Command {
                 return false;
             }
         }
-
-        System.out.println(String.format("Line at index %s removed", index));
 
         if(index == -1) {
             // if index is -1, remove paragraph at the end of the notepad
