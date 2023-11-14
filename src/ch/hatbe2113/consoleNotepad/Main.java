@@ -11,6 +11,12 @@ public class Main {
     private final NotePad notepadHandler;
     private final CommandHandler commandHandler;
 
+    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
+
     private boolean run = true;
 
     public Main() {
@@ -37,7 +43,7 @@ public class Main {
             String[] userInputArray = userInput.split(" ");
 
             if(userInputArray.length < 1) {
-                System.out.println("ERROR: Not a valid amount of arguments!");
+                System.out.println(String.format("%sERROR: Not a valid amount of arguments!%s", Main.ANSI_RED, Main.ANSI_RESET));
             }
 
             String command = userInputArray[0].toLowerCase();
@@ -49,7 +55,7 @@ public class Main {
             }
 
             if(!this.getCommandHandler().isCommand(command)) {
-                System.out.println(String.format("ERROR: \"%s\" Not a valid command!\n", command));
+                System.out.println(String.format("%sERROR: \"%s\" Not a valid command!%s", Main.ANSI_RED, command, Main.ANSI_RESET));
             } else {
                 this.getCommandHandler().executeCommand(command, arguments);
             }

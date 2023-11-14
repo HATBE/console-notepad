@@ -4,7 +4,6 @@ import ch.hatbe2113.consoleNotepad.Main;
 
 public class AddCommand extends Command {
 
-
     public AddCommand(Main main) {
         super(main);
     }
@@ -20,18 +19,18 @@ public class AddCommand extends Command {
             try {
                index = Integer.parseInt(args[0]);
             } catch(Exception e) {
-                System.out.println(String.format("Error: Please enter a line number as a first argument! (%s - %s)", 1, main.getNotepadHandler().getSize() + 1));
+                System.out.println(String.format("%sError: Please enter a line number as a first argument!%s", Main.ANSI_RED, Main.ANSI_RESET));
                 return false;
             }
 
             // notepad size + 1, because you can add a line at the bottom, which is notepad size + 1
             if(index <= 0 || index > main.getNotepadHandler().getSize() + 1)  {
-                System.out.println(String.format("Error! Line %s does not exist!", index));
+                System.out.println(String.format("%sError! Line %s does not exist!%s", Main.ANSI_RED, index, Main.ANSI_RESET));
                 return false;
             }
         }
 
-        text = main.getConsoleHandler().scan("Text: ");
+        text = main.getConsoleHandler().scan("Text:");
 
         if(index == -1) {
             // if index is -1, add paragraph at the end of the notepad

@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: ch.hatbe2113.consoleNotepad.Main
+

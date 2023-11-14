@@ -24,8 +24,14 @@ public class NotePad {
         this.paragraphs.add(text);
     }
 
+    // delete paragraph at certain index
     public void removeParagraph(int index) {
         this.paragraphs.remove(index);
+    }
+
+    // delete paragraph at the end
+    public void removeParagraph() {
+        this.paragraphs.remove(this.getSize() - 1);
     }
 
     public int getSize() {
