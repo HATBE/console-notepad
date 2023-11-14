@@ -32,12 +32,12 @@ public class Main {
         System.out.println("--------------------");
 
         while(this.run) {
-            String userInput = this.getConsoleHandler().scan("Command");
+            String userInput = this.getConsoleHandler().scan(">");
 
             String[] userInputArray = userInput.split(" ");
 
             if(userInputArray.length < 1) {
-                System.err.println("ERROR: Not a valid amount of arguments!");
+                System.out.println("ERROR: Not a valid amount of arguments!");
             }
 
             String command = userInputArray[0].toLowerCase();
@@ -49,7 +49,7 @@ public class Main {
             }
 
             if(!this.getCommandHandler().isCommand(command)) {
-                System.err.println(String.format("ERROR: \"%s\" Not a valid command!\n", command));
+                System.out.println(String.format("ERROR: \"%s\" Not a valid command!\n", command));
             } else {
                 this.getCommandHandler().executeCommand(command, arguments);
             }

@@ -15,13 +15,13 @@ public class DelCommand extends Command {
             try {
                 index = Integer.parseInt(args[0]) - 1;
             } catch(Exception e) {
-                System.err.println("Please enter an int!");
+                System.out.println("Error: Please enter an int!");
                 return false;
             }
         }
 
         if(index > main.getNotepadHandler().getSize() || index < 1) {
-            System.err.printf("Line %s does not exist yet!\n", index + 1);
+            System.out.printf("Error: Line %s does not exist yet!\n", index + 1);
             return false;
         }
 

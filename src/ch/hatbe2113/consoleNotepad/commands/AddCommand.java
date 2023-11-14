@@ -20,18 +20,18 @@ public class AddCommand extends Command {
             try {
                index = Integer.parseInt(args[0]);
             } catch(Exception e) {
-                System.err.println(String.format("Please enter a line number as a first argument!. (%s - %s)", 1, main.getNotepadHandler().getSize() + 1));
+                System.out.println(String.format("Error: Please enter a line number as a first argument! (%s - %s)", 1, main.getNotepadHandler().getSize() + 1));
                 return false;
             }
 
             // notepad size + 1, because you can add a line at the bottom, which is notepad size + 1
             if(index <= 0 || index > main.getNotepadHandler().getSize() + 1)  {
-                System.err.println(String.format("Line %s does not exist!\n", index));
+                System.out.println(String.format("Error! Line %s does not exist!", index));
                 return false;
             }
         }
 
-        text = main.getConsoleHandler().scan("Text");
+        text = main.getConsoleHandler().scan("Text: ");
 
         if(index == -1) {
             // if index is -1, add paragraph at the end of the notepad
