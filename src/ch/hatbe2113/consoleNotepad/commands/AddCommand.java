@@ -3,7 +3,6 @@ package ch.hatbe2113.consoleNotepad.commands;
 import ch.hatbe2113.consoleNotepad.Main;
 
 public class AddCommand extends Command {
-
     public AddCommand(Main main) {
         super(main);
     }

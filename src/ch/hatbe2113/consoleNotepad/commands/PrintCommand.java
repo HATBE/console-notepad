@@ -11,6 +11,11 @@ public class PrintCommand extends Command {
 
     @Override
     public boolean onExecute(String[] args) {
+        if(this.main.getNotepad().getSize() <= 0) {
+            System.out.println(String.format("%sError! Currently, the notepad is empty!%s", Main.ANSI_RED, Main.ANSI_RESET));
+            return false;
+        }
+
         main.getNotepad().print();
         return true;
     }

@@ -18,14 +18,13 @@ public class Main {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
 
-
     private boolean run = true;
 
     public Main() {
         this.consoleHandler = new ConsoleHandler(this);
-        this.notePad = new NotePad(this);
         this.commandHandler = new CommandHandler(this);
         this.notepadHandler = new NotepadHandler(this);
+        this.notePad = new NotePad(this);
     }
 
     public static void main(String[] args) {
