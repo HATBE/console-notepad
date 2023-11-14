@@ -5,12 +5,13 @@ import ch.hatbe2113.consoleNotepad.Main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotePad {
+public class Notepad {
     private final Main main;
     private final List<String> paragraphs = new ArrayList<>();
-    private int columnWidth = 0;
+    private int columnWidth = -1; //
+    private boolean lineNumbersDisplayed = true; // display line numbers as default
 
-    public NotePad(Main main) {
+    public Notepad(Main main) {
         this.main = main;
     }
 
@@ -39,8 +40,17 @@ public class NotePad {
     }
 
     public void print() {
+        // TODO: column width;
         for(int i = 0; i < this.paragraphs.size(); i++) {
-            System.out.println((i + 1) + ": " + this.paragraphs.get(i));
+            String paragraph = "";
+
+            if(this.getLineNumbersDisplayed()) {
+                paragraph +=  String.format("%s: ", (i + 1));
+            }
+
+            paragraph += String.format("%s\n\n", this.paragraphs.get(i));
+
+            System.out.print(paragraph);
         }
     }
 
@@ -54,5 +64,13 @@ public class NotePad {
 
     public void setColumnWidth(int columnWidth) {
         this.columnWidth = columnWidth;
+    }
+
+    public boolean getLineNumbersDisplayed() {
+        return this.lineNumbersDisplayed;
+    }
+
+    public void setLineNumbersDisplayed(boolean lineNumbersDisplayed) {
+        this.lineNumbersDisplayed = lineNumbersDisplayed;
     }
 }

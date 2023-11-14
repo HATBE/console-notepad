@@ -20,7 +20,7 @@ public class AddCommand extends Command {
         // parse second argument to index (int)
         if(args.length > 0) {
             try {
-               index = Integer.parseInt(args[0]);
+                index = Integer.parseInt(args[0]);
             } catch(Exception e) {
                 System.out.println(String.format("%sError: Please enter a line number as a first argument!%s", Main.ANSI_RED, Main.ANSI_RESET));
                 return false;
@@ -33,16 +33,12 @@ public class AddCommand extends Command {
             }
         }
 
-        text = this.scanForText();
+        text = this.main.getConsoleHandler().scan("Text:");
         text = this.filterText(text);
 
         this.addParagraph(index, text);
 
         return true;
-    }
-
-    private String scanForText() {
-        return this.main.getConsoleHandler().scan("Text:");
     }
 
     private boolean indexExists(int index) {

@@ -4,12 +4,12 @@ import ch.hatbe2113.consoleNotepad.commands.*;
 import ch.hatbe2113.consoleNotepad.io.CommandHandler;
 import ch.hatbe2113.consoleNotepad.io.ConsoleHandler;
 import ch.hatbe2113.consoleNotepad.io.NotepadHandler;
-import ch.hatbe2113.consoleNotepad.notepad.NotePad;
+import ch.hatbe2113.consoleNotepad.notepad.Notepad;
 
 public class Main {
 
     private final ConsoleHandler consoleHandler;
-    private final NotePad notePad;
+    private final Notepad notePad;
     private final CommandHandler commandHandler;
     private final NotepadHandler notepadHandler;
 
@@ -24,7 +24,7 @@ public class Main {
         this.consoleHandler = new ConsoleHandler(this);
         this.commandHandler = new CommandHandler(this);
         this.notepadHandler = new NotepadHandler(this);
-        this.notePad = new NotePad(this);
+        this.notePad = new Notepad(this);
     }
 
     public static void main(String[] args) {
@@ -61,7 +61,7 @@ public class Main {
         this.run = false;
     }
 
-    public NotePad getNotepad() {
+    public Notepad getNotepad() {
         return this.notePad;
     }
 

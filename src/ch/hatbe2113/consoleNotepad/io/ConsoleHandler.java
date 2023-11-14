@@ -23,4 +23,5 @@ public class ConsoleHandler {
     public String scan() {
         return this.scanner.nextLine();
     }
+
 }
