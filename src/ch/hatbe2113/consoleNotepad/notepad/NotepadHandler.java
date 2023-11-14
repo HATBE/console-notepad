@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotepadHandler {
-    private Main main;
+    private final Main main;
     private final List<String> paragraphs = new ArrayList<>();
 
     public NotepadHandler(Main main) {

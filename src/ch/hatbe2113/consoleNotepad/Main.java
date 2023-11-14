@@ -29,6 +29,7 @@ public class Main {
 
         while(mainInstance.run) {
             System.out.println("--------------------");
+
             String userInput = mainInstance.consoleHandler.scan("Command");
 
             String[] userInputArray = userInput.split(" ");
@@ -75,5 +76,9 @@ public class Main {
 
     public CommandHandler getCommandHandler() {
         return this.commandHandler;
+    }
+
+    public ConsoleHandler getConsoleHandler() {
+        return consoleHandler;
     }
 }

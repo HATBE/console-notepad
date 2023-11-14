@@ -17,12 +17,19 @@ public class AddCommand extends Command {
 
         if(args.length > 0) {
             try {
-               index = Integer.parseInt(args[0]);
+               index = Integer.parseInt(args[0]) - 1;
             } catch(Exception e) {
                 System.err.println("Please enter an int!");
                 return false;
             }
         }
+
+        if(index > main.getNotepadHandler().getNotepadSize() || index < 0) {
+            System.err.printf("Line %s does not exist yet!\n", index + 1);
+            return false;
+        }
+
+        text = main.getConsoleHandler().scan("Text");
 
         System.out.printf("Add at line: %s\n", index + 1);
 
