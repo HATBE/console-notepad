@@ -1,20 +1,21 @@
 package ch.hatbe2113.consoleNotepad;
 
 import ch.hatbe2113.consoleNotepad.commands.*;
+import ch.hatbe2113.consoleNotepad.io.CommandHandler;
 import ch.hatbe2113.consoleNotepad.io.ConsoleHandler;
-import ch.hatbe2113.consoleNotepad.notepad.NotepadHandler;
+import ch.hatbe2113.consoleNotepad.notepad.NotePad;
 
 public class Main {
 
     private final ConsoleHandler consoleHandler;
-    private final NotepadHandler notepadHandler;
+    private final NotePad notepadHandler;
     private final CommandHandler commandHandler;
 
     private boolean run = true;
 
     public Main() {
         this.consoleHandler = new ConsoleHandler(this);
-        this.notepadHandler = new NotepadHandler(this);
+        this.notepadHandler = new NotePad(this);
         this.commandHandler = new CommandHandler(this);
     }
 
@@ -23,14 +24,15 @@ public class Main {
 
         mainInstance.registerCommands();
 
+        mainInstance.loop();
+    }
+
+    private void loop() {
         System.out.println("Notepad");
+        System.out.println("--------------------");
 
-        boolean run = true;
-
-        while(mainInstance.run) {
-            System.out.println("--------------------");
-
-            String userInput = mainInstance.consoleHandler.scan("Command");
+        while(this.run) {
+            String userInput = this.getConsoleHandler().scan("Command");
 
             String[] userInputArray = userInput.split(" ");
 
@@ -46,12 +48,11 @@ public class Main {
                 System.arraycopy(userInputArray, 1, arguments, 0, userInputArray.length - 1);
             }
 
-            if(!mainInstance.getCommandHandler().isCommand(command)) {
-                System.err.printf("ERROR: \"%s\" Not a valid command!\n", command);
-                return;
+            if(!this.getCommandHandler().isCommand(command)) {
+                System.err.println(String.format("ERROR: \"%s\" Not a valid command!\n", command));
+            } else {
+                this.getCommandHandler().executeCommand(command, arguments);
             }
-
-            mainInstance.getCommandHandler().executeCommand(command, arguments);
         }
     }
 
@@ -66,11 +67,11 @@ public class Main {
         this.commandHandler.registerCommand("replace", new ReplaceCommand(this));
     }
 
-    public void exit() {
+    public void exitProgram() {
         this.run = false;
     }
 
-    public NotepadHandler getNotepadHandler() {
+    public NotePad getNotepadHandler() {
         return this.notepadHandler;
     }
 

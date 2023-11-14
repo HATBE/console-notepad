@@ -1,11 +1,12 @@
-package ch.hatbe2113.consoleNotepad.commands;
+package ch.hatbe2113.consoleNotepad.io;
 
 import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.commands.Command;
 
 import java.util.HashMap;
 
 public class CommandHandler {
-    private Main main;
+    private final Main main;
     private HashMap<String, Command> commands = new HashMap<String, Command>();
 
     public CommandHandler(Main main) {

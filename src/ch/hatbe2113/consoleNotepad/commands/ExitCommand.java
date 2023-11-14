@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
     @Override
     public boolean onExecute(String[] args) {
         System.out.println("Exiting Notepad...");
-        this.main.exit();
+        this.main.exitProgram();
         return true;
     }
 }

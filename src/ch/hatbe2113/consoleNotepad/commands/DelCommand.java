@@ -20,7 +20,7 @@ public class DelCommand extends Command {
             }
         }
 
-        if(index > main.getNotepadHandler().getNotepadSize() || index < 1) {
+        if(index > main.getNotepadHandler().getSize() || index < 1) {
             System.err.printf("Line %s does not exist yet!\n", index + 1);
             return false;
         }

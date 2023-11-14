@@ -1,7 +1,6 @@
 package ch.hatbe2113.consoleNotepad.commands;
 
 import ch.hatbe2113.consoleNotepad.Main;
-import ch.hatbe2113.consoleNotepad.notepad.NotepadHandler;
 
 public class PrintCommand extends Command {
 
