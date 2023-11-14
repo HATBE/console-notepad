@@ -14,7 +14,7 @@ public class ConsoleHandler {
         this.scanner = new Scanner(System.in);
     }
 
-    // Scanner with text
+    // scanner with text
     public String scan(String text) {
         System.out.printf("%s ", text);
         return this.scan();

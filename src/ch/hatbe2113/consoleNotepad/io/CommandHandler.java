@@ -27,11 +27,11 @@ public class CommandHandler {
         this.commands.get(name).onExecute(args);
     }
 
-    public HashMap<String, Command> getCommands() {
-        return this.commands;
-    }
-
     public boolean isCommand(String name) {
         return this.commands.containsKey(name);
+    }
+
+    public HashMap<String, Command> getCommands() {
+        return this.commands;
     }
 }

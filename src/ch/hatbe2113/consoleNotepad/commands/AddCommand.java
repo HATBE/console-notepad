@@ -10,7 +10,6 @@ public class AddCommand extends Command {
 
     @Override
     public boolean onExecute(String[] args) {
-        // set index to bottom of file as standard
         int index = -1;
         String text = "";
 
@@ -29,25 +28,40 @@ public class AddCommand extends Command {
             }
 
             // notepad size + 1, because you can add a line at the bottom, which is notepad size + 1
-            if(index <= 0 || index > main.getNotepadHandler().getSize() + 1)  {
+            if(this.indexExists(index))  {
                 System.out.println(String.format("%sError! Line %s does not exist!%s", Main.ANSI_RED, index, Main.ANSI_RESET));
                 return false;
             }
         }
 
-        text = main.getConsoleHandler().scan("Text:");
+        text = this.scanForText();
+        text = this.filterText(text);
 
-        // filter the text. Allowed: (a-z, A-Z, äöüÄÖÜ, 0-9, .,:;-!? '()"%@+*[]{}/\&#$),
-        text = text.replaceAll("[^a-zA-ZäöüÄÖÜ0-9.,:;!? '()\"%@+*\\[\\]{}\\/\\\\&#$-]", "");
-
-        if(index == -1) {
-            // if index is -1, add paragraph at the end of the notepad
-            main.getNotepadHandler().addParagraph(text);
-        } else {
-            // else, add it at the specific index
-            main.getNotepadHandler().addParagraph(index - 1, text);
-        }
+        this.addParagraph(index, text);
 
         return true;
+    }
+
+    private String scanForText() {
+        return this.main.getConsoleHandler().scan("Text:");
+    }
+
+    private boolean indexExists(int index) {
+        return index <= 0 || index > this.main.getNotepad().getSize() + 1;
+    }
+
+    private void addParagraph(int index, String text) {
+        if(index == -1) {
+            // if index is -1, add paragraph at the end of the notepad
+            this.main.getNotepad().addParagraph(text);
+            return;
+        }
+        // else, add it at the specific index
+        this.main.getNotepad().addParagraph(index - 1, text);
+    }
+
+    private String filterText(String text) {
+        // filter the text. Allowed: (a-z, A-Z, äöüÄÖÜ, 0-9, .,:;-!? '()"%@+*[]{}/\&#$),
+        return text.replaceAll("[^a-zA-ZäöüÄÖÜ0-9.,:;!? '()\"%@+*\\[\\]{}\\/\\\\&#$-]", "");
     }
 }

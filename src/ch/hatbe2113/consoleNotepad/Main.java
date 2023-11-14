@@ -3,13 +3,15 @@ package ch.hatbe2113.consoleNotepad;
 import ch.hatbe2113.consoleNotepad.commands.*;
 import ch.hatbe2113.consoleNotepad.io.CommandHandler;
 import ch.hatbe2113.consoleNotepad.io.ConsoleHandler;
+import ch.hatbe2113.consoleNotepad.io.NotepadHandler;
 import ch.hatbe2113.consoleNotepad.notepad.NotePad;
 
 public class Main {
 
     private final ConsoleHandler consoleHandler;
-    private final NotePad notepadHandler;
+    private final NotePad notePad;
     private final CommandHandler commandHandler;
+    private final NotepadHandler notepadHandler;
 
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -21,8 +23,9 @@ public class Main {
 
     public Main() {
         this.consoleHandler = new ConsoleHandler(this);
-        this.notepadHandler = new NotePad(this);
+        this.notePad = new NotePad(this);
         this.commandHandler = new CommandHandler(this);
+        this.notepadHandler = new NotepadHandler(this);
     }
 
     public static void main(String[] args) {
@@ -34,32 +37,14 @@ public class Main {
     }
 
     private void loop() {
-        System.out.println("Notepad");
+        System.out.println("Console Notepad");
         System.out.println("--------------------");
 
         while(this.run) {
-            String userInput = this.getConsoleHandler().scan(">");
-
-            String[] userInputArray = userInput.split(" ");
-
-            if(userInputArray.length < 1) {
-                System.out.println(String.format("%sERROR: Not a valid amount of arguments!%s", Main.ANSI_RED, Main.ANSI_RESET));
-            }
-
-            String command = userInputArray[0].toLowerCase();
-            String[] arguments = new String[Math.max(userInputArray.length - 1, 0)];
-
-            if(userInputArray.length > 1) {
-                // array copy -> into arguments
-                System.arraycopy(userInputArray, 1, arguments, 0, userInputArray.length - 1);
-            }
-
-            if(!this.getCommandHandler().isCommand(command)) {
-                System.out.println(String.format("%sERROR: \"%s\" Not a valid command!%s", Main.ANSI_RED, command, Main.ANSI_RESET));
-            } else {
-                this.getCommandHandler().executeCommand(command, arguments);
-            }
+           this.notepadHandler.scanCommands();
         }
+
+        System.exit(0);
     }
 
     private void registerCommands() {
@@ -77,8 +62,8 @@ public class Main {
         this.run = false;
     }
 
-    public NotePad getNotepadHandler() {
-        return this.notepadHandler;
+    public NotePad getNotepad() {
+        return this.notePad;
     }
 
     public CommandHandler getCommandHandler() {

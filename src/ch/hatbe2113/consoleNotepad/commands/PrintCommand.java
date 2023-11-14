@@ -11,7 +11,7 @@ public class PrintCommand extends Command {
 
     @Override
     public boolean onExecute(String[] args) {
-        main.getNotepadHandler().print();
+        main.getNotepad().print();
         return true;
     }
 }

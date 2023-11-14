@@ -26,20 +26,28 @@ public class DelCommand extends Command {
             }
 
             // notepad size, because you can just remove the line at the bottom
-            if(index <= 0 || index > main.getNotepadHandler().getSize()) {
+            if(this.indexExists(index)) {
                 System.out.println(String.format("%sError! Line %s does not exist!%s", Main.ANSI_RED, index, Main.ANSI_RESET));
                 return false;
             }
         }
 
-        if(index == -1) {
-            // if index is -1, remove paragraph at the end of the notepad
-            main.getNotepadHandler().removeParagraph();
-        } else {
-            // else, remove it at the specific index
-            main.getNotepadHandler().removeParagraph(index - 1);
-        }
+        this.deleteParagraph(index);
 
         return true;
+    }
+
+    private boolean indexExists(int index) {
+        return index <= 0 || index > main.getNotepad().getSize();
+    }
+
+    private void deleteParagraph(int index) {
+        if(index == -1) {
+            // if index is -1, remove paragraph at the end of the notepad
+            main.getNotepad().removeParagraph();
+        } else {
+            // else, remove it at the specific index
+            main.getNotepad().removeParagraph(index - 1);
+        }
     }
 }
