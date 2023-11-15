@@ -37,6 +37,4 @@ public class NotepadHandler {
             this.main.getCommandHandler().executeCommand(command, args);
         }
     }
-
-
 }

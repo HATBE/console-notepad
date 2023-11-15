@@ -1,6 +1,7 @@
 package ch.hatbe2113.consoleNotepad.commands;
 
 import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.io.ArgumentsHandler;
 import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class DummyCommand extends Command {
@@ -19,18 +20,9 @@ public class DummyCommand extends Command {
             return false;
         }
 
-        // parse second argument to index (int)
         if(args.length > 0) {
-            try {
-                index = Integer.parseInt(args[0]);
-            } catch(Exception e) {
-                System.out.printf("%sError: Please enter a line number as a first argument!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
-                return false;
-            }
-
-            // notepad size + 1, because you can add a line at the bottom, which is notepad size + 1
-            if(this.indexExists(index))  {
-                System.out.printf("%sError! Line %s does not exist!%s\n", TextFormatter.ANSI_RED, index, TextFormatter.ANSI_RESET);
+            index = ArgumentsHandler.parseParagraphNumber("DUMMY", args , 0, main.getNotepad());
+            if(index == -1) {
                 return false;
             }
         }
@@ -48,9 +40,5 @@ public class DummyCommand extends Command {
         }
         // else, add it at the specific index
         this.main.getNotepad().addParagraph(index - 1, text);
-    }
-
-    private boolean indexExists(int index) {
-        return index <= 0 || index > this.main.getNotepad().getSize() + 1;
     }
 }

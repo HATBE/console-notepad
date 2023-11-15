@@ -77,6 +77,10 @@ public class Notepad {
         this.replaceWord(this.getSize() - 1, toReplace, replaceTo);
     }
 
+    public boolean indexExists(int index) {
+        return index <= 0 || index > this.getSize() + 1;
+    }
+
     public List<String> getParagraphs() {
         return this.paragraphs;
     }
