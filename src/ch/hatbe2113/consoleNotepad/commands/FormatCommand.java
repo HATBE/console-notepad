@@ -1,6 +1,7 @@
 package ch.hatbe2113.consoleNotepad.commands;
 
 import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.notepad.Notepad;
 
 public class FormatCommand extends Command {
     public FormatCommand(Main main) {
@@ -36,7 +37,7 @@ public class FormatCommand extends Command {
     }
 
     private void formatRaw() {
-        this.main.getNotepad().setLineNumbersDisplayed(!this.main.getNotepad().getLineNumbersDisplayed());
+        this.main.getNotepad().setOutputMode(Notepad.OutPut.RAW);
     }
 
     private void formatFix(String columnWidth) {
@@ -48,7 +49,7 @@ public class FormatCommand extends Command {
             return;
         }
 
+        this.main.getNotepad().setOutputMode(Notepad.OutPut.FIX);
         this.main.getNotepad().setColumnWidth(columnWidthInt);
-
     }
 }

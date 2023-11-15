@@ -1,15 +1,21 @@
 package ch.hatbe2113.consoleNotepad.notepad;
 
 import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Notepad {
+    public enum OutPut {
+        RAW,
+        FIX
+    }
+
     private final Main main;
     private final List<String> paragraphs = new ArrayList<>();
     private int columnWidth = -1; //
-    private boolean lineNumbersDisplayed = true; // display line numbers as default
+    private OutPut outputMode = OutPut.RAW;
 
     public Notepad(Main main) {
         this.main = main;
@@ -44,11 +50,13 @@ public class Notepad {
         for(int i = 0; i < this.paragraphs.size(); i++) {
             String paragraph = "";
 
-            if(this.getLineNumbersDisplayed()) {
+            if(this.getOutputMode() == OutPut.RAW) {
                 paragraph +=  String.format("%s: ", (i + 1));
+                paragraph += String.format("%s\n\n", this.paragraphs.get(i));
+            } else if(this.getOutputMode() == OutPut.FIX) {
+                paragraph = TextFormatter.lineBreak(this.paragraphs.get(i), this.getColumnWidth());
+                paragraph = String.format("%s\n\n", paragraph);
             }
-
-            paragraph += String.format("%s\n\n", this.paragraphs.get(i));
 
             System.out.print(paragraph);
         }
@@ -66,11 +74,11 @@ public class Notepad {
         this.columnWidth = columnWidth;
     }
 
-    public boolean getLineNumbersDisplayed() {
-        return this.lineNumbersDisplayed;
+    public void setOutputMode(OutPut outputMode) {
+        this.outputMode = outputMode;
     }
 
-    public void setLineNumbersDisplayed(boolean lineNumbersDisplayed) {
-        this.lineNumbersDisplayed = lineNumbersDisplayed;
+    public OutPut getOutputMode() {
+        return outputMode;
     }
 }
