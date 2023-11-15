@@ -1,25 +1,19 @@
 package ch.hatbe2113.consoleNotepad.notepad;
 
-import ch.hatbe2113.consoleNotepad.Main;
 import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Notepad {
-    public enum OutPut {
+    public enum Output {
         RAW,
         FIX
     }
 
-    private final Main main;
     private final List<String> paragraphs = new ArrayList<>();
-    private int columnWidth = -1; //
-    private OutPut outputMode = OutPut.RAW;
-
-    public Notepad(Main main) {
-        this.main = main;
-    }
+    private int columnWidth = 0;
+    private Output outputMode = Output.RAW;
 
     // add paragraph at certain index
     public void addParagraph(int index, String text) {
@@ -46,19 +40,25 @@ public class Notepad {
     }
 
     public void print() {
-        // TODO: column width;
-        for(int i = 0; i < this.paragraphs.size(); i++) {
+        for(int i = 0; i < this.getSize(); i++) {
             String paragraph = "";
 
-            if(this.getOutputMode() == OutPut.RAW) {
-                paragraph +=  String.format("%s: ", (i + 1));
-                paragraph += String.format("%s\n\n", this.paragraphs.get(i));
-            } else if(this.getOutputMode() == OutPut.FIX) {
-                paragraph = TextFormatter.lineBreak(this.paragraphs.get(i), this.getColumnWidth());
-                paragraph = String.format("%s\n\n", paragraph);
+            if(this.getOutputMode() == Output.RAW) {
+                // FORMAT RAW
+                paragraph = String.format("%s: ", (i + 1));                 // line number
+                paragraph += String.format("%s\n", this.paragraphs.get(i)); // paragraph
+            } else if(this.getOutputMode() == Output.FIX) {
+                // FORMAT FIX
+                String formattedParagraph = TextFormatter.lineBreak(this.paragraphs.get(i), this.getColumnWidth());
+                paragraph = String.format("%s\n", formattedParagraph);
             }
 
-            System.out.print(paragraph);
+            System.out.print(paragraph);                                    // print paragraph
+
+            // add a space after paragraph, but not at the end of the output.
+            if(i < this.getSize() - 1) {
+                System.out.print("\n");
+            }
         }
     }
 
@@ -74,11 +74,11 @@ public class Notepad {
         this.columnWidth = columnWidth;
     }
 
-    public void setOutputMode(OutPut outputMode) {
+    public void setOutputMode(Output outputMode) {
         this.outputMode = outputMode;
     }
 
-    public OutPut getOutputMode() {
+    public Output getOutputMode() {
         return outputMode;
     }
 }

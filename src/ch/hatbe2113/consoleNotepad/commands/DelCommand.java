@@ -1,6 +1,7 @@
 package ch.hatbe2113.consoleNotepad.commands;
 
 import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class DelCommand extends Command {
     public DelCommand(Main main) {
@@ -13,7 +14,7 @@ public class DelCommand extends Command {
 
         // return if too many arguments
         if(args.length >= 2) {
-            System.out.println(String.format("%sError! Too many arguments: use \"DEL [n]\"!%s", Main.ANSI_RED, Main.ANSI_RESET));
+            System.out.printf("%sError! Too many arguments: use \"DEL [n]\"!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
             return false;
         }
 
@@ -21,13 +22,13 @@ public class DelCommand extends Command {
             try {
                 index = Integer.parseInt(args[0]);
             } catch(Exception e) {
-                System.out.println(String.format("%sError: Please enter a line number as a first argument!%s", Main.ANSI_RED, Main.ANSI_RESET));
+                System.out.printf("%sError: Please enter a line number as a first argument!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
                 return false;
             }
 
             // notepad size, because you can just remove the line at the bottom
             if(this.indexExists(index)) {
-                System.out.println(String.format("%sError! Line %s does not exist!%s", Main.ANSI_RED, index, Main.ANSI_RESET));
+                System.out.printf("%sError! Line %s does not exist!%s\n", TextFormatter.ANSI_RED, index, TextFormatter.ANSI_RESET);
                 return false;
             }
         }

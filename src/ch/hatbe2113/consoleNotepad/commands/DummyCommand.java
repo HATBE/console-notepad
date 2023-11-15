@@ -1,6 +1,7 @@
 package ch.hatbe2113.consoleNotepad.commands;
 
 import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class DummyCommand extends Command {
     String dummyText = "Virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, septentr ionesimmensoslongusw ordos ionesimmensoslongusws.";
@@ -14,7 +15,7 @@ public class DummyCommand extends Command {
         int index = -1;
 
         if(args.length >= 2) {
-            System.out.println(String.format("%sError! Too many arguments: use \"DUMMY [n]\"!%s", Main.ANSI_RED, Main.ANSI_RESET));
+            System.out.printf("%sError! Too many arguments: use \"DUMMY [n]\"!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
             return false;
         }
 
@@ -23,13 +24,13 @@ public class DummyCommand extends Command {
             try {
                 index = Integer.parseInt(args[0]);
             } catch(Exception e) {
-                System.out.println(String.format("%sError: Please enter a line number as a first argument!%s", Main.ANSI_RED, Main.ANSI_RESET));
+                System.out.printf("%sError: Please enter a line number as a first argument!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
                 return false;
             }
 
             // notepad size + 1, because you can add a line at the bottom, which is notepad size + 1
             if(this.indexExists(index))  {
-                System.out.println(String.format("%sError! Line %s does not exist!%s", Main.ANSI_RED, index, Main.ANSI_RESET));
+                System.out.printf("%sError! Line %s does not exist!%s\n", TextFormatter.ANSI_RED, index, TextFormatter.ANSI_RESET);
                 return false;
             }
         }

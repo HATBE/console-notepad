@@ -5,26 +5,21 @@ import ch.hatbe2113.consoleNotepad.io.CommandHandler;
 import ch.hatbe2113.consoleNotepad.io.ConsoleHandler;
 import ch.hatbe2113.consoleNotepad.io.NotepadHandler;
 import ch.hatbe2113.consoleNotepad.notepad.Notepad;
+import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class Main {
-
+    private final Notepad notepad;
     private final ConsoleHandler consoleHandler;
-    private final Notepad notePad;
     private final CommandHandler commandHandler;
     private final NotepadHandler notepadHandler;
-
-    public static final String ANSI_WHITE = "\u001B[37m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
 
     private boolean run = true;
 
     public Main() {
+        this.notepad = new Notepad();
         this.consoleHandler = new ConsoleHandler(this);
         this.commandHandler = new CommandHandler(this);
         this.notepadHandler = new NotepadHandler(this);
-        this.notePad = new Notepad(this);
     }
 
     public static void main(String[] args) {
@@ -33,17 +28,17 @@ public class Main {
         mainInstance.registerCommands();
 
         mainInstance.loop();
+
+        System.exit(0);
     }
 
     private void loop() {
-        System.out.println("Console Notepad");
+        System.out.printf("Console Notepad %sby Genny%s\n", TextFormatter.ANSI_GREEN, TextFormatter.ANSI_RESET);
         System.out.println("--------------------");
 
         while(this.run) {
            this.notepadHandler.scanCommands();
         }
-
-        System.exit(0);
     }
 
     private void registerCommands() {
@@ -62,7 +57,7 @@ public class Main {
     }
 
     public Notepad getNotepad() {
-        return this.notePad;
+        return this.notepad;
     }
 
     public CommandHandler getCommandHandler() {

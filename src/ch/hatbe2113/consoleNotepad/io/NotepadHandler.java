@@ -1,6 +1,7 @@
 package ch.hatbe2113.consoleNotepad.io;
 
 import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class NotepadHandler {
 
@@ -15,7 +16,7 @@ public class NotepadHandler {
         String[] userInputArray = userInput.split(" ");
 
         if(userInputArray.length < 1) {
-            System.out.println(String.format("%sERROR: Not a valid amount of arguments!%s", Main.ANSI_RED, Main.ANSI_RESET));
+            System.out.printf("%sERROR: Not a valid amount of arguments!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
         }
 
         String command = userInputArray[0].toLowerCase();
@@ -31,7 +32,7 @@ public class NotepadHandler {
 
     private void executeCommand(String command, String[] args) {
         if(!this.main.getCommandHandler().isCommand(command)) {
-            System.out.println(String.format("%sERROR: \"%s\" Not a valid command!%s", Main.ANSI_RED, command, Main.ANSI_RESET));
+            System.out.printf("%sERROR: \"%s\" Not a valid command!%s\n", TextFormatter.ANSI_RED, command, TextFormatter.ANSI_RESET);
         } else {
             this.main.getCommandHandler().executeCommand(command, args);
         }

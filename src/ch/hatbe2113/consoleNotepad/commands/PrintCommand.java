@@ -1,6 +1,7 @@
 package ch.hatbe2113.consoleNotepad.commands;
 
 import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class PrintCommand extends Command {
 
@@ -12,7 +13,7 @@ public class PrintCommand extends Command {
     @Override
     public boolean onExecute(String[] args) {
         if(this.main.getNotepad().getSize() <= 0) {
-            System.out.println(String.format("%sError! Currently, the notepad is empty!%s", Main.ANSI_RED, Main.ANSI_RESET));
+            System.out.printf("%sError! Currently, the notepad is empty!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
             return false;
         }
 
