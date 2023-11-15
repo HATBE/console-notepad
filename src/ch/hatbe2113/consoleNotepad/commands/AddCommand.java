@@ -13,6 +13,7 @@ public class AddCommand extends Command {
         int index = -1;
         String text = "";
 
+        // return if too many arguments
         if(args.length >= 2) {
             System.out.printf("%sError! Too many arguments: use \"ADD [n]\"!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
             return false;
@@ -35,7 +36,7 @@ public class AddCommand extends Command {
         }
 
         text = this.main.getConsoleHandler().scan("Text:");
-        text = this.filterText(text);
+        text = TextFormatter.filterText(text);
 
         this.addParagraph(index, text);
 
@@ -54,10 +55,5 @@ public class AddCommand extends Command {
         }
         // else, add it at the specific index
         this.main.getNotepad().addParagraph(index - 1, text);
-    }
-
-    private String filterText(String text) {
-        // filter the text. Allowed: (a-z, A-Z, äöüÄÖÜ, 0-9, .,:;-!? '()"%@+*[]{}/\&#$),
-        return text.replaceAll("[^a-zA-ZäöüÄÖÜ0-9.,:;!? '()\"%@+*\\[\\]{}\\/\\\\&#$-]", "");
     }
 }

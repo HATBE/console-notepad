@@ -4,8 +4,6 @@ import ch.hatbe2113.consoleNotepad.Main;
 import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class PrintCommand extends Command {
-
-
     public PrintCommand(Main main) {
         super(main);
     }

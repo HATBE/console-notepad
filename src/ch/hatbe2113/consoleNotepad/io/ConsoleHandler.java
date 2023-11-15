@@ -5,7 +5,6 @@ import ch.hatbe2113.consoleNotepad.Main;
 import java.util.Scanner;
 
 public class ConsoleHandler {
-
     private final Main main;
     private final Scanner scanner;
 

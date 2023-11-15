@@ -4,7 +4,7 @@ import ch.hatbe2113.consoleNotepad.Main;
 import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class DummyCommand extends Command {
-    String dummyText = "Virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, septentr ionesimmensoslongusw ordos ionesimmensoslongusws.";
+    String dummyText = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
     public DummyCommand(Main main) {
         super(main);

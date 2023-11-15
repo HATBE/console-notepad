@@ -4,8 +4,8 @@ import ch.hatbe2113.consoleNotepad.Main;
 import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class NotepadHandler {
-
     private final Main main;
+
     public NotepadHandler(Main main) {
         this.main = main;
     }

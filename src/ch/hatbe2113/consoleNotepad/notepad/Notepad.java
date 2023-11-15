@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Notepad {
-    public enum Output {
+    public enum OutputModes {
         RAW,
         FIX
     }
 
     private final List<String> paragraphs = new ArrayList<>();
     private int columnWidth = 0;
-    private Output outputMode = Output.RAW;
+    private OutputModes outputMode = OutputModes.RAW;
 
     // add paragraph at certain index
     public void addParagraph(int index, String text) {
@@ -32,7 +32,7 @@ public class Notepad {
 
     // delete paragraph at the end
     public void removeParagraph() {
-        this.paragraphs.remove(this.getSize() - 1);
+        this.removeParagraph(this.getSize() - 1);
     }
 
     public int getSize() {
@@ -40,14 +40,19 @@ public class Notepad {
     }
 
     public void print() {
+        // if notepad is empty, return
+        if(this.getSize() <= 0) {
+            return;
+        }
+
         for(int i = 0; i < this.getSize(); i++) {
             String paragraph = "";
 
-            if(this.getOutputMode() == Output.RAW) {
+            if(this.getOutputMode() == OutputModes.RAW) {
                 // FORMAT RAW
                 paragraph = String.format("%s: ", (i + 1));                 // line number
                 paragraph += String.format("%s\n", this.paragraphs.get(i)); // paragraph
-            } else if(this.getOutputMode() == Output.FIX) {
+            } else if(this.getOutputMode() == OutputModes.FIX) {
                 // FORMAT FIX
                 String formattedParagraph = TextFormatter.lineBreak(this.paragraphs.get(i), this.getColumnWidth());
                 paragraph = String.format("%s\n", formattedParagraph);
@@ -62,6 +67,16 @@ public class Notepad {
         }
     }
 
+    // replace words in the paragraph with the specific index in the notepad
+    public void replaceWord(int index, String toReplace, String replaceTo) {
+        this.paragraphs.set(index, this.paragraphs.get(index).replaceAll(toReplace, replaceTo));
+    }
+
+    // replace words in the paragraph end of the notepad
+    public void replaceWord(String toReplace, String replaceTo) {
+        this.replaceWord(this.getSize() - 1, toReplace, replaceTo);
+    }
+
     public List<String> getParagraphs() {
         return this.paragraphs;
     }
@@ -74,11 +89,11 @@ public class Notepad {
         this.columnWidth = columnWidth;
     }
 
-    public void setOutputMode(Output outputMode) {
+    public void setOutputMode(OutputModes outputMode) {
         this.outputMode = outputMode;
     }
 
-    public Output getOutputMode() {
+    public OutputModes getOutputMode() {
         return outputMode;
     }
 }

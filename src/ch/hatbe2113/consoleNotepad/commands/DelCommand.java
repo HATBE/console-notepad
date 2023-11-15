@@ -18,6 +18,7 @@ public class DelCommand extends Command {
             return false;
         }
 
+        // parse second argument to index (int)
         if(args.length > 0) {
             try {
                 index = Integer.parseInt(args[0]);

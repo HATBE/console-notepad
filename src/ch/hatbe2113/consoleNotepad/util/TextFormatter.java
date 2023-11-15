@@ -34,4 +34,9 @@ public class TextFormatter {
 
         return output.toString();
     }
+
+    public static String filterText(String text) {
+        // filter the text. Allowed: (a-z, A-Z, äöüÄÖÜ, 0-9, .,:;-!? '()"%@+*[]{}/\&#$),
+        return text.replaceAll("[^a-zA-ZäöüÄÖÜ0-9.,:;!? '()\"%@+*\\[\\]{}\\/\\\\&#$-]", "");
+    }
 }

@@ -38,7 +38,7 @@ public class FormatCommand extends Command {
     }
 
     private void formatRaw() {
-        this.main.getNotepad().setOutputMode(Notepad.Output.RAW);
+        this.main.getNotepad().setOutputMode(Notepad.OutputModes.RAW);
     }
 
     private void formatFix(String columnWidth) {
@@ -50,7 +50,7 @@ public class FormatCommand extends Command {
             return;
         }
 
-        this.main.getNotepad().setOutputMode(Notepad.Output.FIX);
+        this.main.getNotepad().setOutputMode(Notepad.OutputModes.FIX);
         this.main.getNotepad().setColumnWidth(columnWidthInt);
     }
 }
