@@ -35,10 +35,6 @@ public class AddCommand extends Command {
         return true;
     }
 
-    private boolean indexExists(int index) {
-        return index <= 0 || index > this.main.getNotepad().getSize() + 1;
-    }
-
     private void addParagraph(int index, String text) {
         if(index == -1) {
             // if index is -1, add paragraph at the end of the notepad

@@ -37,7 +37,7 @@ public class Main {
         System.out.println("--------------------");
 
         while(this.run) {
-           this.notepadHandler.scanCommands();
+            this.notepadHandler.scanCommands();
         }
     }
 

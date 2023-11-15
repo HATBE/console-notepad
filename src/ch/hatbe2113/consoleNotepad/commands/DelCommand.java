@@ -34,10 +34,10 @@ public class DelCommand extends Command {
     private void deleteParagraph(int index) {
         if(index == -1) {
             // if index is -1, remove paragraph at the end of the notepad
-            main.getNotepad().removeParagraph();
-        } else {
-            // else, remove it at the specific index
-            main.getNotepad().removeParagraph(index - 1);
+            this.main.getNotepad().removeParagraph();
+            return;
         }
+        // else, remove it at the specific index
+        this.main.getNotepad().removeParagraph(index - 1);
     }
 }
