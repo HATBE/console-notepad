@@ -1,6 +1,7 @@
 package ch.hatbe2113.consoleNotepad.commands;
 
 import ch.hatbe2113.consoleNotepad.Main;
+import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
 public class IndexCommand extends Command {
     public IndexCommand(Main main) {
@@ -9,7 +10,13 @@ public class IndexCommand extends Command {
 
     @Override
     public boolean onExecute(String[] args) {
-        System.out.println("INDEX is not implemented");
+        if(this.main.getNotepad().getSize() <= 0) {
+            System.out.printf("%sError! Currently, the notepad is empty!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
+            return false;
+        }
+
+        main.getNotepad().index();
+
         return true;
     }
 }

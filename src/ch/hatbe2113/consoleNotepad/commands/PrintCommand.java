@@ -16,6 +16,7 @@ public class PrintCommand extends Command {
         }
 
         main.getNotepad().print();
+
         return true;
     }
 }

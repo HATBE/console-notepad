@@ -32,6 +32,8 @@ Change format of print
 
 ![](./.img/7.png)
 
+![](./.img/4.png)
+
 ## REPLACE
 - REPLACE [n]
 
@@ -44,9 +46,9 @@ Replaces a word or phrase on line n, if no line number is given, replace words i
 ## INDEX
 - INDEX
 
-?????
+Outputs an index (word index) of all terms that occur more than three times across all paragraphs. A term begins with a capital letter. The index lists the paragraphs in which the respective term occurs as a comma-separated sequence of numbers.
 
-TODO:
+![](./.img/9.png)
 
 ## EXIT
 - EXIT

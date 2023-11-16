@@ -2,8 +2,8 @@ package ch.hatbe2113.consoleNotepad.notepad;
 
 import ch.hatbe2113.consoleNotepad.util.TextFormatter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Notepad {
     public enum OutputModes {
@@ -75,6 +75,32 @@ public class Notepad {
     // replace words in the paragraph end of the notepad
     public void replaceWord(String toReplace, String replaceTo) {
         this.replaceWord(this.getSize() - 1, toReplace, replaceTo);
+    }
+
+    public void index() {
+        Map<String, Set<Integer>> index = new HashMap<>();
+
+        int paragraphNumber = 1;
+
+        for(String paragraph : this.getParagraphs()) {
+            String[] words = paragraph.split("\\s+");
+
+            for(String word : words) {
+                if(Character.isUpperCase(word.charAt(0))) {
+                    index.computeIfAbsent(word, k -> new HashSet<>()).add(paragraphNumber);
+                }
+            }
+
+            paragraphNumber++;
+        }
+
+        for(Map.Entry<String, Set<Integer>> entry : index.entrySet()) {
+            if(entry.getValue().size() > 3) {
+                System.out.print(entry.getKey() + " ");
+                String paragraphList = entry.getValue().stream().map(String::valueOf).collect(Collectors.joining(","));
+                System.out.println(paragraphList);
+            }
+        }
     }
 
     public boolean indexExists(int index) {
