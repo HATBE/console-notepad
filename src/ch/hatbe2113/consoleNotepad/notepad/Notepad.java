@@ -39,6 +39,7 @@ public class Notepad {
         return this.paragraphs.size();
     }
 
+    // print all paragraphs in the given format (this.outputMode)
     public void print() {
         // if notepad is empty, return
         if(this.getSize() <= 0) {
@@ -54,7 +55,7 @@ public class Notepad {
                 paragraph += String.format("%s\n", this.paragraphs.get(i)); // paragraph
             } else if(this.getOutputMode() == OutputModes.FIX) {
                 // FORMAT FIX
-                String formattedParagraph = TextFormatter.lineBreak(this.paragraphs.get(i), this.getColumnWidth());
+                String formattedParagraph = TextFormatter.lineBreak(this.paragraphs.get(i), this.getColumnWidth()); // run paragraph through line breaker (break at "this.columnWidth'th" char / space before)
                 paragraph = String.format("%s\n", formattedParagraph);
             }
 
@@ -77,40 +78,41 @@ public class Notepad {
         this.replaceWord(this.getSize() - 1, toReplace, replaceTo);
     }
 
+    // print index of words that appear more than 3 times in paragraphs
     public boolean printIndex() {
-        Map<String, Set<Integer>> index = new HashMap<>();
+        Map<String, Set<Integer>> index = new HashMap<>(); // String: Word | Int-Set: paragraph numbers in which word is present
 
-        int paragraphNumber = 1;
+        int currentParagraphNumber = 1; // human-readable index (n + 1)
 
         for(String paragraph : this.getParagraphs()) {
             String[] words = paragraph.split("\\s+"); // split paragraph in words (by one or more spaces)
 
             for(String word : words) {
                 if(Character.isUpperCase(word.charAt(0))) { // check if first char of word is uppercase
-                    index.computeIfAbsent(word, k -> new HashSet<>()).add(paragraphNumber);
+                    // this is some senior level dev shit, right?
+                    index.computeIfAbsent(word, k -> new HashSet<>()).add(currentParagraphNumber); // if word is not in index map, add its paragraph number to index map
+                    // Hey Alex, don't steal my CODE!!!!! xD
                 }
             }
 
-            paragraphNumber++;
+            currentParagraphNumber++;
         }
 
         int numOfIndexes = 0;
 
         for(Map.Entry<String, Set<Integer>> entry : index.entrySet()) {
-            // check if word count is over 3
+            // check if word count is over 3, then, add to index
             if(entry.getValue().size() >= 3) {
-                System.out.print(entry.getKey() + " ");
-                String paragraphList = entry.getValue().stream().map(String::valueOf).collect(Collectors.joining(","));
-                System.out.println(paragraphList);
+                // sometimes, my genius, its, its almost frightening
+                String paragraphList = entry.getValue().stream().map(String::valueOf).collect(Collectors.joining(",")); // transform the values of the "paragraph numbers" collection to a comma separated list
+
+                System.out.print(entry.getKey() + " \t"); // word
+                System.out.println(paragraphList); // list of paragraph numbers the word occurs
                 numOfIndexes++;
             }
         }
 
-        if(numOfIndexes == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return numOfIndexes != 0; // if no word is index worthy, return false, otherwise, true
     }
 
     public boolean indexExists(int index) {

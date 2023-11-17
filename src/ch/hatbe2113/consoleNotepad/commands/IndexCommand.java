@@ -17,6 +17,7 @@ public class IndexCommand extends Command {
 
         boolean index = main.getNotepad().printIndex();
 
+        // if index did not find anything to index, print error message
         if(!index) {
             System.out.printf("%sError! Currently, the notepad has nothing to index!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
             return false;

@@ -7,7 +7,7 @@ public class ArgumentsHandler {
     public static int parseParagraphNumber(String commandName, String[] args, int idx, Notepad notepad) {
         int index = -1;
 
-        // parse idx'th argument to index (int)
+        // parse "idx'th" argument to index (int)
         try {
             index = Integer.parseInt(args[idx]);
         } catch(Exception e) {

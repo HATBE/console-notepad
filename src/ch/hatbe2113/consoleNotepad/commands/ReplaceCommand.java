@@ -28,9 +28,11 @@ public class ReplaceCommand extends Command {
             }
         }
 
+        // get word to find
         toReplace = this.main.getConsoleHandler().scan("Word to find:");
         toReplace = TextFormatter.filterText(toReplace);
 
+        // get word to replace "toReplace" with
         replaceTo = this.main.getConsoleHandler().scan("Replace with:");
         replaceTo = TextFormatter.filterText(replaceTo);
 
