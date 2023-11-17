@@ -15,7 +15,12 @@ public class IndexCommand extends Command {
             return false;
         }
 
-        main.getNotepad().index();
+        boolean index = main.getNotepad().printIndex();
+
+        if(!index) {
+            System.out.printf("%sError! Currently, the notepad has nothing to index!%s\n", TextFormatter.ANSI_RED, TextFormatter.ANSI_RESET);
+            return false;
+        }
 
         return true;
     }

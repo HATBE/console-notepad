@@ -50,7 +50,7 @@ public class Notepad {
 
             if(this.getOutputMode() == OutputModes.RAW) {
                 // FORMAT RAW
-                paragraph = String.format("%s: ", (i + 1));                 // line number
+                paragraph = String.format("%s: ", (i + 1)); // line number
                 paragraph += String.format("%s\n", this.paragraphs.get(i)); // paragraph
             } else if(this.getOutputMode() == OutputModes.FIX) {
                 // FORMAT FIX
@@ -58,7 +58,7 @@ public class Notepad {
                 paragraph = String.format("%s\n", formattedParagraph);
             }
 
-            System.out.print(paragraph);                                    // print paragraph
+            System.out.print(paragraph); // print paragraph
 
             // add a space after paragraph, but not at the end of the output.
             if(i < this.getSize() - 1) {
@@ -77,16 +77,16 @@ public class Notepad {
         this.replaceWord(this.getSize() - 1, toReplace, replaceTo);
     }
 
-    public void index() {
+    public boolean printIndex() {
         Map<String, Set<Integer>> index = new HashMap<>();
 
         int paragraphNumber = 1;
 
         for(String paragraph : this.getParagraphs()) {
-            String[] words = paragraph.split("\\s+");
+            String[] words = paragraph.split("\\s+"); // split paragraph in words (by one or more spaces)
 
             for(String word : words) {
-                if(Character.isUpperCase(word.charAt(0))) {
+                if(Character.isUpperCase(word.charAt(0))) { // check if first char of word is uppercase
                     index.computeIfAbsent(word, k -> new HashSet<>()).add(paragraphNumber);
                 }
             }
@@ -94,12 +94,22 @@ public class Notepad {
             paragraphNumber++;
         }
 
+        int numOfIndexes = 0;
+
         for(Map.Entry<String, Set<Integer>> entry : index.entrySet()) {
-            if(entry.getValue().size() > 3) {
+            // check if word count is over 3
+            if(entry.getValue().size() >= 3) {
                 System.out.print(entry.getKey() + " ");
                 String paragraphList = entry.getValue().stream().map(String::valueOf).collect(Collectors.joining(","));
                 System.out.println(paragraphList);
+                numOfIndexes++;
             }
+        }
+
+        if(numOfIndexes == 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 
