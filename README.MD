@@ -1,66 +1,96 @@
-# Commands
-## ADD
-- ADD [n]
+This console notepad is a university project.
 
-inputs are filtered
+Its a notepad controlled in a console entierly written in Java. \
+You can add lines, delete lines, add a pre defined dummy text, print the lines in a defined format and index words.
 
-Adds a paragraph on line n, if no line number is given, add a new at the bottom
+## Commands
 
-![](./.img/1.png)
+### ADD
 
-## DEL
-- DEL [n]
+**ADD [n]**
 
-Deletes line n, if no line number is given, remove the last line
+Calls up the input of the text for the paragraph after entering this command. The paragraph is inserted at position n. If the paragraph number is missing, it is added at the end.
 
-![](./.img/2.png)
+![](.img/1.png)
 
-## DUMMY
-- DUMMY [n]
+### DEL
 
-![](./.img/3.png)
+**DEL [n]**
 
-Adds a pre-defined dummy text on line n, if no line number is given, add a new line at the bottom
+Deletes a paragraph. If the paragraph number is missing, the last paragraph is deleted.
 
-## FORMAT
-- format raw
-- format fix <b>
+![](.img/2.png)
 
-Change format of print
-- fix = no line numbering, linebreak on b'th character
-- raw = no line breaks, with line numbering
+### DUMMY
 
-![](./.img/7.png)
+**DUMMY [n]**
 
-![](./.img/4.png)
+Inserts a permanently programmed dummy text. If no paragraph number n is specified, the paragraph is added at the end.
 
-## REPLACE
-- REPLACE [n]
+![](.img/3.png)
 
-inputs are filtered
+### PRINT
 
-Replaces a word or phrase on line n, if no line number is given, replace words in the last line
+**PRINT**
 
-![](./.img/5.png)
+Output of the text according to the currently set output format.
 
-## INDEX
-- INDEX
 
-Outputs an index (word index) of all terms that occur more than three times across all paragraphs. A term begins with a capital letter. The index lists the paragraphs in which the respective term occurs as a comma-separated sequence of numbers.
 
-![](./.img/9.png)
+### FORMAT
 
-## EXIT
-- EXIT
+**FORMAT RAW**
 
-exits program
+Sets the output format to the output of paragraphs preceded by paragraph numbers. This is the default behavior.
+Output format:
+```
+<1>: <text>
+...
+<n>: <text>
+```
 
-![](./.img/6.png)
+![](.img/7.png)
 
-# Error handling
+**FORMAT FIX**
 
-All foreseen errors are handled.
+Sets the output format to an output with a maximum column width of b characters. The wrap behavior is as follows:
+- Wrapping is only allowed after a space.
+- The space character after which the line is wrapped does not count towards the line length. It is still output on the current line, even if it may no longer fit on it.
+- If there is no break within the column width after a break, you can break after the column width.
 
-Example:
+![](.img/4.png)
 
-![](./.img/8.png)
+### REPLACE
+
+**REPLACE [n]**
+
+After entering this command, first calls up the input of a word or text part to be searched for
+or part of the text to be searched for in paragraph n and then to enter the text with which the
+is to be replaced with. The search and replace is carried out per paragraph, not across
+across paragraph boundaries. If no paragraph number n is specified, the last paragraph
+is changed.
+
+![](.img/5.png)
+
+### INDEX
+
+**INDEX**
+
+Outputs an index (word index) of all terms that occur more than three times across all paragraphs.
+than three times across all paragraphs. A term begins with a capital letter. The index lists
+the paragraphs in which the respective term occurs as a comma-separated sequence of numbers.
+separated by a comma.
+
+![](.img/9.png)
+
+### EXIT
+
+**EXIT**
+
+Exits the program.
+
+![](.img/6.png)
+
+### Error handling
+
+![](.img/8.png)
